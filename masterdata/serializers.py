@@ -6,7 +6,6 @@ field_data = {
     'employee': ('name', 'parent', 'is_featured', 'image','description','is_active')
 }
 
-
 def model_serializer_factory(mdl):
     class MasterSerializer(ModelSerializer):
         class Meta:
