@@ -38,8 +38,68 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'masterdata',
-    'rest_framework'
+    'rest_framework',
+    'djcelery',
+    'kombu.transport.django'
 ]
+
+
+import djcelery
+djcelery.setup_loader()
+# BROKEN_URL="django://"
+
+# For RabbitMQ
+BROKER_URL = 'amqp://[localhost]'
+CELERY_RESULT_BACKEND = 'amqp://[localhost]'
+# Celery Data Format
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+
+
+
+
+# BROKEN_HOST="localhost"
+# BROKEN_PORT=5672
+# BROKEN_USER="guest"
+# BROKEN_PASSWORD="guest"
+# BROKEN_VHOST="/"
+
+
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER='manikandan@mindlogicx.com'
+# EMAIL_HOST_PASSWORD='9381374281'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS=True
+
+from smtplib import SMTPRecipientsRefused
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''# eg xxxxx@gmail.com
+EMAIL_HOST_PASSWORD = ''#ex password
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
+
+
+
+
+CELERY_ALWAYS_EAGER=False
+
+
+
+
+
+
+
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

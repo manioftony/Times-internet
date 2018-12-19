@@ -5,7 +5,7 @@ from masterdata.serializers import model_serializer_factory,filter_serializer_fa
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from masterdata.models import Category
-
+from masterdata.task import send_feedback_email_task
 # Create your views here.
 
 
@@ -52,6 +52,12 @@ class EditCFeed(JsonManager, g.UpdateAPIView):
 class ActiveCFeed(JsonManager, g.DestroyAPIView):
 
     def perform_destroy(self, instance):
+        name='manikandan'
+        email = "manikandan@mindlogicx.com"
+        msg="sasas"
+        send_feedback_email_task.delay(name,email,msg)
+
+
         instance.is_active = {0: 2, 2: 0}[instance.is_active]
         self.message = '%s %s successfully' % (
             self.kwargs.get('model'),
